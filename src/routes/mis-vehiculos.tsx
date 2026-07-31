@@ -187,51 +187,61 @@ function Hero({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   ];
   return (
     <section className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07),0_10px_20px_-2px_rgba(4,8,24,0.04)]">
-      <div className="px-6 py-6 sm:px-10 sm:pb-6 sm:pt-8">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight text-foreground">Mis vehículos</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
+      <div className="px-5 py-6 sm:px-8 sm:pb-5 sm:pt-7">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--brand-blue)]">
+              Panel de propietario
+            </p>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Mis vehículos
+            </h1>
+            <p className="mt-1 max-w-md text-sm text-muted-foreground">
               Gestiona tu flota y monitorea el rendimiento de tu negocio en Rodii.
             </p>
           </div>
-          <button className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-6 py-3 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
+          <button className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95 sm:px-6 sm:py-3">
             <Plus className="h-4 w-4" />
             Publicar vehículo
           </button>
         </div>
       </div>
 
-      <div className="border-y border-border bg-secondary/50 px-6 py-5 sm:px-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 sm:gap-8">
-          {stats.map((s) => (
-            <div key={s.v} className="flex flex-col">
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                {s.v}
-              </span>
-              <div className="mt-1 flex items-center gap-1.5">
-                <span className="text-2xl font-semibold tracking-tight text-foreground">{s.k}</span>
-                {s.badge && (
-                  <span className="rounded bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--brand-blue)]">
-                    {s.badge}
-                  </span>
-                )}
-                {s.icon === "star" && (
-                  <Star className="h-4 w-4 fill-[color:var(--brand-coral)] text-[color:var(--brand-coral)]" />
-                )}
+      <div className="border-t border-border bg-secondary/40 px-5 py-4 sm:px-8">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-10">
+          {stats.map((s, i) => (
+            <div key={s.v} className="flex items-center gap-3">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                  {s.v}
+                </span>
+                <div className="mt-0.5 flex items-center gap-1.5">
+                  <span className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{s.k}</span>
+                  {s.badge && (
+                    <span className="rounded-md bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--brand-blue)]">
+                      {s.badge}
+                    </span>
+                  )}
+                  {s.icon === "star" && (
+                    <Star className="h-4 w-4 fill-[color:var(--brand-coral)] text-[color:var(--brand-coral)]" />
+                  )}
+                </div>
               </div>
+              {i < stats.length - 1 && (
+                <span className="hidden h-8 w-px bg-border sm:block" />
+              )}
             </div>
           ))}
         </div>
       </div>
 
-      <div className="px-6 sm:px-10">
+      <div className="px-5 sm:px-8">
         <div className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
           {tabs.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`relative shrink-0 px-4 py-4 text-sm font-medium transition ${
+              className={`relative shrink-0 px-4 py-3.5 text-sm font-medium transition ${
                 tab === t ? "text-[color:var(--brand-blue)]" : "text-muted-foreground hover:text-foreground"
               }`}
             >
