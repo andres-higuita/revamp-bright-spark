@@ -180,60 +180,64 @@ function MisVehiculos() {
 
 function Hero({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   const stats = [
-    { k: "3", v: "Vehículos activos", accent: false },
-    { k: "73", v: "Viajes completados", accent: false },
-    { k: "$7.3M", v: "Ganancia este mes", accent: true },
-    { k: "4.9", v: "Calificación promedio", accent: false },
+    { k: "3", v: "Vehículos" },
+    { k: "73", v: "Viajes" },
+    { k: "$7.3M", v: "Ganancias", badge: "MES" },
+    { k: "4.9", v: "Valoración", icon: "star" },
   ];
   return (
-    <section className="overflow-hidden rounded-3xl bg-foreground text-background sm:rounded-[32px]">
-      <div className="p-6 sm:p-10">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:flex sm:items-center sm:justify-between">
-          <div className="min-w-0">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
-              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-coral)]" />
-              Panel de propietario
-            </span>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Mis vehículos</h1>
-            <p className="mt-2 text-sm text-white/60 sm:text-base">
-              Administra tus publicaciones, tarifas y reservas en un solo lugar.
+    <section className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07),0_10px_20px_-2px_rgba(4,8,24,0.04)]">
+      <div className="px-6 py-6 sm:px-10 sm:pb-6 sm:pt-8">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <div>
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground">Mis vehículos</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Gestiona tu flota y monitorea el rendimiento de tu negocio en Rodii.
             </p>
           </div>
-          <button className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[color:var(--brand-coral)] px-4 py-3 text-sm font-semibold text-foreground transition hover:brightness-105 sm:px-5">
+          <button className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-6 py-3 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
             <Plus className="h-4 w-4" />
-            <span className="hidden sm:inline">Publicar vehículo</span>
+            Publicar vehículo
           </button>
         </div>
+      </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 sm:mt-10 sm:grid-cols-4">
+      <div className="border-y border-border bg-secondary/50 px-6 py-5 sm:px-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 sm:gap-8">
           {stats.map((s) => (
-            <div key={s.v} className="bg-[color:var(--brand-ink)] px-4 py-5 sm:px-6">
-              <div
-                className={`text-2xl font-semibold tracking-tight sm:text-3xl ${
-                  s.accent ? "text-[color:var(--brand-coral)]" : ""
-                }`}
-              >
-                {s.k}
+            <div key={s.v} className="flex flex-col">
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                {s.v}
+              </span>
+              <div className="mt-1 flex items-center gap-1.5">
+                <span className="text-2xl font-semibold tracking-tight text-foreground">{s.k}</span>
+                {s.badge && (
+                  <span className="rounded bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--brand-blue)]">
+                    {s.badge}
+                  </span>
+                )}
+                {s.icon === "star" && (
+                  <Star className="h-4 w-4 fill-[color:var(--brand-coral)] text-[color:var(--brand-coral)]" />
+                )}
               </div>
-              <div className="mt-1 text-[11px] uppercase tracking-wider text-white/45">{s.v}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="border-t border-white/10 px-4 sm:px-10">
+      <div className="px-6 sm:px-10">
         <div className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
           {tabs.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className={`relative shrink-0 px-4 py-4 text-sm font-medium transition ${
-                tab === t ? "text-background" : "text-white/50 hover:text-white/80"
+                tab === t ? "text-[color:var(--brand-blue)]" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {t}
               {tab === t && (
-                <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[color:var(--brand-coral)]" />
+                <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[color:var(--brand-blue)]" />
               )}
             </button>
           ))}
