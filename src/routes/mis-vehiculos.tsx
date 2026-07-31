@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Plus,
@@ -14,7 +14,7 @@ import {
   MoreHorizontal,
   ArrowUpRight,
 } from "lucide-react";
-import { AppNav, AppFooter } from "@/components/site-chrome";
+import { AppNav, AppFooter, Logo } from "@/components/site-chrome";
 import carMazda from "@/assets/car-mazda.jpg";
 import carToyota from "@/assets/car-toyota.jpg";
 import carKia from "@/assets/car-kia.jpg";
@@ -104,6 +104,13 @@ const filters = [
   { label: "En revisión", count: 0 },
 ];
 
+const stats = [
+  { k: "3", v: "Vehículos" },
+  { k: "73", v: "Viajes" },
+  { k: "$7.3M", v: "Ganancias", badge: "MES" },
+  { k: "4.9", v: "Valoración", icon: "star" },
+];
+
 function MisVehiculos() {
   const [tab, setTab] = useState(tabs[0]);
   const [filter, setFilter] = useState("Todos");
@@ -112,146 +119,183 @@ function MisVehiculos() {
   return (
     <div className="min-h-screen bg-secondary/40 text-foreground">
       <AppNav />
-      <main className="mx-auto max-w-7xl px-4 pb-4 pt-6 sm:px-6 sm:pt-10">
-        <Hero tab={tab} setTab={setTab} />
+      <div className="flex items-start">
+        <LeftSidebar tab={tab} setTab={setTab} />
+        <div className="min-w-0 flex-1">
+          <main className="mx-auto max-w-7xl px-4 pb-4 pt-6 sm:px-6 sm:pt-10">
+            <MobileHero tab={tab} setTab={setTab} />
 
-        <section className="mt-6 sm:mt-8">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:flex sm:justify-between">
-            <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
-              {filters.map((f) => {
-                const active = filter === f.label;
-                return (
-                  <button
-                    key={f.label}
-                    onClick={() => setFilter(f.label)}
-                    className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
-                      active
-                        ? "border-transparent bg-foreground text-background"
-                        : "border-border bg-background text-foreground/70 hover:bg-secondary"
-                    }`}
-                  >
-                    {f.label}
-                    <span className={`text-xs ${active ? "text-background/60" : "text-muted-foreground"}`}>
-                      {f.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="flex shrink-0 items-center gap-1 rounded-full border border-border bg-background p-1">
-              {(
-                [
-                  { id: "list" as const, icon: <List className="h-4 w-4" /> },
-                  { id: "grid" as const, icon: <LayoutGrid className="h-4 w-4" /> },
-                ]
-              ).map((v) => (
-                <button
-                  key={v.id}
-                  onClick={() => setView(v.id)}
-                  aria-label={v.id === "grid" ? "Vista cuadrícula" : "Vista lista"}
-                  className={`grid h-8 w-8 place-items-center rounded-full transition ${
-                    view === v.id ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
-                  }`}
-                >
-                  {v.icon}
-                </button>
-              ))}
-            </div>
-          </div>
+            <section className="mt-2 sm:mt-4">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:flex sm:justify-between">
+                <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
+                  {filters.map((f) => {
+                    const active = filter === f.label;
+                    return (
+                      <button
+                        key={f.label}
+                        onClick={() => setFilter(f.label)}
+                        className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+                          active
+                            ? "border-transparent bg-foreground text-background"
+                            : "border-border bg-background text-foreground/70 hover:bg-secondary"
+                        }`}
+                      >
+                        {f.label}
+                        <span className={`text-xs ${active ? "text-background/60" : "text-muted-foreground"}`}>
+                          {f.count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="flex shrink-0 items-center gap-1 rounded-full border border-border bg-background p-1">
+                  {(
+                    [
+                      { id: "list" as const, icon: <List className="h-4 w-4" /> },
+                      { id: "grid" as const, icon: <LayoutGrid className="h-4 w-4" /> },
+                    ]
+                  ).map((v) => (
+                    <button
+                      key={v.id}
+                      onClick={() => setView(v.id)}
+                      aria-label={v.id === "grid" ? "Vista cuadrícula" : "Vista lista"}
+                      className={`grid h-8 w-8 place-items-center rounded-full transition ${
+                        view === v.id ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+                      }`}
+                    >
+                      {v.icon}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-          <div
-            className={
-              view === "grid"
-                ? "mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-                : "mt-5 flex flex-col gap-4"
-            }
-          >
-            {vehicles.map((v) =>
-              view === "grid" ? <VehicleCard key={v.name} v={v} /> : <VehicleRow key={v.name} v={v} />
-            )}
-            {view === "grid" && <AddVehicleCard />}
-          </div>
-        </section>
-      </main>
-      <AppFooter />
+              <div
+                className={
+                  view === "grid"
+                    ? "mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3"
+                    : "mt-5 flex flex-col gap-4"
+                }
+              >
+                {vehicles.map((v) =>
+                  view === "grid" ? <VehicleCard key={v.name} v={v} /> : <VehicleRow key={v.name} v={v} />
+                )}
+                {view === "grid" && <AddVehicleCard />}
+              </div>
+            </section>
+          </main>
+          <AppFooter />
+        </div>
+      </div>
     </div>
   );
 }
 
-function Hero({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
-  const stats = [
-    { k: "3", v: "Vehículos" },
-    { k: "73", v: "Viajes" },
-    { k: "$7.3M", v: "Ganancias", badge: "MES" },
-    { k: "4.9", v: "Valoración", icon: "star" },
-  ];
+function LeftSidebar({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
   return (
-    <section className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07),0_10px_20px_-2px_rgba(4,8,24,0.04)]">
-      <div className="px-5 py-6 sm:px-8 sm:pb-5 sm:pt-7">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--brand-blue)]">
-              Panel de propietario
-            </p>
-            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Mis vehículos
-            </h1>
-            <p className="mt-1 max-w-md text-sm text-muted-foreground">
-              Gestiona tu flota y monitorea el rendimiento de tu negocio en Rodii.
-            </p>
-          </div>
-          <button className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95 sm:px-6 sm:py-3">
-            <Plus className="h-4 w-4" />
-            Publicar vehículo
-          </button>
+    <aside className="sticky top-14 hidden h-[calc(100vh-3.5rem)] shrink-0 flex-col overflow-y-auto border-r border-border bg-card lg:flex lg:w-[280px] xl:w-[300px]">
+      <div className="p-6">
+        <Link to="/" className="inline-block">
+          <Logo className="text-xl" />
+        </Link>
+
+        <div className="mt-8">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--brand-blue)]">
+            Panel de propietario
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground xl:text-3xl">Mis vehículos</h1>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Gestiona tu flota y monitorea el rendimiento de tu negocio en Rodii.
+          </p>
         </div>
+
+        <button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
+          <Plus className="h-4 w-4" />
+          Publicar vehículo
+        </button>
       </div>
 
-      <div className="border-t border-border bg-secondary/40 px-5 py-4 sm:px-8">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-10">
-          {stats.map((s, i) => (
-            <div key={s.v} className="flex items-center gap-3">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  {s.v}
-                </span>
-                <div className="mt-0.5 flex items-center gap-1.5">
-                  <span className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{s.k}</span>
-                  {s.badge && (
-                    <span className="rounded-md bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--brand-blue)]">
-                      {s.badge}
-                    </span>
-                  )}
-                  {s.icon === "star" && (
-                    <Star className="h-4 w-4 fill-[color:var(--brand-coral)] text-[color:var(--brand-coral)]" />
-                  )}
-                </div>
+      <div className="border-t border-border px-6 py-5">
+        <div className="grid grid-cols-2 gap-3">
+          {stats.map((s) => (
+            <div key={s.v} className="rounded-2xl bg-secondary/60 p-3">
+              <div className="flex items-center gap-1.5">
+                <span className="text-lg font-semibold tracking-tight text-foreground">{s.k}</span>
+                {s.badge && (
+                  <span className="rounded-md bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--brand-blue)]">
+                    {s.badge}
+                  </span>
+                )}
+                {s.icon === "star" && (
+                  <Star className="h-3.5 w-3.5 fill-[color:var(--brand-coral)] text-[color:var(--brand-coral)]" />
+                )}
               </div>
-              {i < stats.length - 1 && (
-                <span className="hidden h-8 w-px bg-border sm:block" />
-              )}
+              <span className="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                {s.v}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="px-5 sm:px-8">
-        <div className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
-          {tabs.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`relative shrink-0 px-4 py-3.5 text-sm font-medium transition ${
-                tab === t ? "text-[color:var(--brand-blue)]" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {t}
-              {tab === t && (
-                <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[color:var(--brand-blue)]" />
-              )}
-            </button>
-          ))}
+      <div className="border-t border-border px-3 py-4">
+        <div className="space-y-1">
+          {tabs.map((t) => {
+            const active = tab === t;
+            return (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-medium transition ${
+                  active
+                    ? "bg-[color:var(--brand-blue)]/10 text-[color:var(--brand-blue)]"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                }`}
+              >
+                {t}
+                {active && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-blue)]" />}
+              </button>
+            );
+          })}
         </div>
+      </div>
+    </aside>
+  );
+}
+
+function MobileHero({ tab, setTab }: { tab: string; setTab: (t: string) => void }) {
+  return (
+    <section className="mb-6 lg:hidden">
+      <div className="rounded-3xl border border-border bg-card p-5 shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07),0_10px_20px_-2px_rgba(4,8,24,0.04)] sm:p-6">
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--brand-blue)]">
+            Panel de propietario
+          </p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Mis vehículos</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Gestiona tu flota y monitorea el rendimiento de tu negocio en Rodii.
+          </p>
+        </div>
+        <button className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
+          <Plus className="h-4 w-4" />
+          Publicar vehículo
+        </button>
+      </div>
+
+      <div className="mt-4 -mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
+        {tabs.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`relative shrink-0 px-4 py-3 text-sm font-medium transition ${
+              tab === t ? "text-[color:var(--brand-blue)]" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {t}
+            {tab === t && (
+              <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-[color:var(--brand-blue)]" />
+            )}
+          </button>
+        ))}
       </div>
     </section>
   );
