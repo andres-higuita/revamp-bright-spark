@@ -61,15 +61,15 @@ function Perfil() {
         <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
           <ProfileCard />
           <div className="min-w-0">
-            <nav className="-mx-1 flex gap-1 overflow-x-auto rounded-full border border-border bg-card p-1 px-1 [scrollbar-width:none]">
+            <nav className="flex gap-1 overflow-x-auto border-b border-border [scrollbar-width:none]">
               {tabs.map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
+                  className={`shrink-0 border-b-2 px-4 py-3 text-sm font-medium transition ${
                     tab === t
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                      ? "border-foreground text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {t}
@@ -77,7 +77,7 @@ function Perfil() {
               ))}
             </nav>
 
-            <div className="mt-5">
+            <div className="mt-6">
               {tab === "Información Personal" && <PersonalTab />}
               {tab === "Cuenta y Seguridad" && <SecurityTab />}
               {tab === "Verificación" && <VerificationTab />}
@@ -102,7 +102,7 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07)]">
+    <section className="overflow-hidden rounded-xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07)]">
       <div className="border-b border-border px-5 py-5 sm:px-7">
         <h2 className="text-lg font-semibold tracking-tight sm:text-xl">{title}</h2>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
@@ -114,7 +114,7 @@ function Panel({
 
 function ProfileCard() {
   return (
-    <aside className="h-fit overflow-hidden rounded-3xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07)] lg:sticky lg:top-24">
+    <aside className="h-fit overflow-hidden rounded-xl border border-border bg-card shadow-[0_2px_15px_-3px_rgba(4,8,24,0.07)] lg:sticky lg:top-24">
       <div className="relative h-24 bg-[color:var(--brand-blue)]/10">
         <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_20%_0%,color-mix(in_oklab,var(--brand-coral)_35%,transparent),transparent_60%)]" />
       </div>
@@ -133,7 +133,7 @@ function ProfileCard() {
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <h1 className="truncate text-xl font-semibold tracking-tight">Andres Higuita</h1>
-          <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--brand-blue)]/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[color:var(--brand-blue)]">
+          <span className="inline-flex items-center gap-1 rounded-md bg-[color:var(--brand-blue)]/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[color:var(--brand-blue)]">
             <BadgeCheck className="h-3 w-3" /> Verificado
           </span>
         </div>
@@ -145,7 +145,7 @@ function ProfileCard() {
           <InfoLine icon={<CalendarDays className="h-4 w-4" />} value="Miembro desde abril de 2026" />
         </ul>
 
-        <div className="mt-5 grid grid-cols-3 gap-2 rounded-2xl bg-secondary/70 p-3 text-center">
+        <div className="mt-5 grid grid-cols-3 gap-2 rounded-lg bg-secondary/70 p-3 text-center">
           <MiniStat value="4" label="Vehículos" />
           <MiniStat value="3" label="Activos" />
           <MiniStat value="3.3" label="Rating" />
@@ -190,7 +190,7 @@ function Field({
     <div className="min-w-0">
       <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</label>
       <div
-        className={`mt-2 flex items-center gap-2 rounded-2xl border px-4 py-3 transition ${
+        className={`mt-2 flex items-center gap-2 rounded-lg border px-4 py-3 transition ${
           disabled
             ? "border-transparent bg-secondary/70 text-muted-foreground"
             : "border-border bg-background focus-within:border-[color:var(--brand-blue)] focus-within:ring-4 focus-within:ring-[color:var(--brand-blue)]/10"
@@ -211,7 +211,7 @@ function Field({
 function PersonalTab() {
   return (
     <Panel title="Información personal" description="Estos datos se usan para verificar tu identidad y contactarte.">
-      <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-secondary/50 p-4">
+      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-border bg-secondary/50 p-4">
         <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-background text-sm font-semibold">
           AH
         </div>
@@ -219,7 +219,7 @@ function PersonalTab() {
           <div className="text-sm font-semibold">Foto de perfil</div>
           <div className="text-xs text-muted-foreground">JPG o PNG · Máx. 10 MB</div>
         </div>
-        <button className="shrink-0 rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background transition hover:bg-[color:var(--brand-blue)]">
+        <button className="shrink-0 rounded-lg bg-foreground px-4 py-2 text-xs font-semibold text-background transition hover:bg-[color:var(--brand-blue)]">
           Cambiar
         </button>
       </div>
@@ -242,7 +242,7 @@ function PersonalTab() {
           label="Teléfono"
           value="+57 316 662 6154"
           suffix={
-            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[color:var(--brand-blue)]/10 px-2 py-0.5 text-[10px] font-bold uppercase text-[color:var(--brand-blue)]">
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-md bg-[color:var(--brand-blue)]/10 px-2 py-0.5 text-[10px] font-bold uppercase text-[color:var(--brand-blue)]">
               <Check className="h-3 w-3" /> Verificado
             </span>
           }
@@ -250,10 +250,10 @@ function PersonalTab() {
       </div>
 
       <div className="mt-7 flex flex-wrap gap-3 border-t border-border pt-5">
-        <button className="rounded-full bg-[color:var(--brand-coral)] px-6 py-3 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
+        <button className="rounded-lg bg-[color:var(--brand-coral)] px-6 py-3 text-sm font-semibold text-foreground transition hover:brightness-105 active:scale-95">
           Guardar cambios
         </button>
-        <button className="rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground/70 transition hover:bg-secondary">
+        <button className="rounded-lg border border-border px-6 py-3 text-sm font-medium text-foreground/70 transition hover:bg-secondary">
           Cancelar
         </button>
       </div>
@@ -273,8 +273,8 @@ function Row({
   action: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 rounded-2xl border border-border p-4 sm:flex sm:justify-between">
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-foreground">{icon}</div>
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 rounded-lg border border-border p-4 sm:flex sm:justify-between">
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-secondary text-foreground">{icon}</div>
       <div className="min-w-0 sm:flex-1">
         <div className="truncate text-sm font-semibold">{title}</div>
         <div className="text-xs text-muted-foreground">{desc}</div>
@@ -294,7 +294,7 @@ function SecurityTab() {
             title="Correo electrónico"
             desc="andres.higuita@gmail.com"
             action={
-              <button className="w-full rounded-full border border-border px-4 py-2 text-xs font-medium transition hover:bg-secondary sm:w-auto">
+              <button className="w-full rounded-lg border border-border px-4 py-2 text-xs font-medium transition hover:bg-secondary sm:w-auto">
                 Cambiar
               </button>
             }
@@ -304,7 +304,7 @@ function SecurityTab() {
             title="Contraseña"
             desc="Actualizada hace 3 meses"
             action={
-              <button className="w-full rounded-full border border-border px-4 py-2 text-xs font-medium transition hover:bg-secondary sm:w-auto">
+              <button className="w-full rounded-lg border border-border px-4 py-2 text-xs font-medium transition hover:bg-secondary sm:w-auto">
                 Actualizar
               </button>
             }
@@ -314,7 +314,7 @@ function SecurityTab() {
             title="Verificación en dos pasos"
             desc="Añade una capa extra de seguridad al iniciar sesión"
             action={
-              <button className="w-full rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background transition hover:bg-[color:var(--brand-blue)] sm:w-auto">
+              <button className="w-full rounded-lg bg-foreground px-4 py-2 text-xs font-semibold text-background transition hover:bg-[color:var(--brand-blue)] sm:w-auto">
                 Activar
               </button>
             }
@@ -329,7 +329,7 @@ function SecurityTab() {
             title="iPhone 15 · Medellín"
             desc="Sesión actual · Hoy a las 15:42"
             action={
-              <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--brand-blue)]/10 px-3 py-1 text-[11px] font-semibold text-[color:var(--brand-blue)]">
+              <span className="inline-flex items-center gap-1 rounded-md bg-[color:var(--brand-blue)]/10 px-3 py-1 text-[11px] font-semibold text-[color:var(--brand-blue)]">
                 Activa
               </span>
             }
@@ -339,7 +339,7 @@ function SecurityTab() {
             title="MacBook Pro · Medellín"
             desc="Último acceso: 10 de agosto"
             action={
-              <button className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-medium text-foreground/70 transition hover:bg-secondary sm:w-auto">
+              <button className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-border px-4 py-2 text-xs font-medium text-foreground/70 transition hover:bg-secondary sm:w-auto">
                 <LogOut className="h-3.5 w-3.5" /> Cerrar
               </button>
             }
@@ -353,8 +353,8 @@ function SecurityTab() {
 function VerificationTab() {
   return (
     <Panel title="Verificación" description="Verifica tu identidad para acceder a todas las funciones de Rodii.">
-      <div className="flex items-start gap-4 rounded-2xl border border-[color:var(--brand-blue)]/20 bg-[color:var(--brand-blue)]/[0.06] p-5">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[color:var(--brand-blue)] text-background">
+      <div className="flex items-start gap-4 rounded-lg border border-[color:var(--brand-blue)]/20 bg-[color:var(--brand-blue)]/[0.06] p-5">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-[color:var(--brand-blue)] text-background">
           <ShieldCheck className="h-5 w-5" />
         </span>
         <div className="min-w-0">
@@ -383,12 +383,12 @@ function VerificationTab() {
 
 function VerifyCard({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <article className="rounded-2xl border border-border p-5 transition hover:shadow-[0_24px_50px_-32px_rgba(4,8,24,0.3)]">
+    <article className="rounded-lg border border-border p-5 transition hover:shadow-[0_24px_50px_-32px_rgba(4,8,24,0.3)]">
       <div className="flex items-start justify-between gap-3">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-secondary text-foreground">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-secondary text-foreground">
           {icon}
         </span>
-        <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[color:var(--brand-blue)]/10 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--brand-blue)]">
+        <span className="inline-flex shrink-0 items-center gap-1 rounded-md bg-[color:var(--brand-blue)]/10 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--brand-blue)]">
           <Check className="h-3 w-3" /> Verificado
         </span>
       </div>
@@ -407,12 +407,12 @@ function PaymentsTab() {
           <CardRow last4="4242" primary />
           <CardRow last4="1881" />
         </div>
-        <button className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-border py-4 text-sm font-semibold transition hover:border-[color:var(--brand-coral)] hover:bg-secondary/50">
+        <button className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border py-4 text-sm font-semibold transition hover:border-[color:var(--brand-coral)] hover:bg-secondary/50">
           <Plus className="h-4 w-4" /> Agregar nueva tarjeta
         </button>
       </Panel>
 
-      <section className="overflow-hidden rounded-3xl border border-border bg-card">
+      <section className="overflow-hidden rounded-xl border border-border bg-card">
         <button
           onClick={() => setOpen((o) => !o)}
           className="flex w-full items-center justify-between gap-3 px-5 py-5 text-left sm:px-7"
@@ -439,11 +439,11 @@ function PaymentsTab() {
 function CardRow({ last4, primary }: { last4: string; primary?: boolean }) {
   return (
     <div
-      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-2xl border p-4 ${
+      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-lg border p-4 ${
         primary ? "border-[color:var(--brand-coral)]/40 bg-[color:var(--brand-coral)]/[0.07]" : "border-border"
       }`}
     >
-      <span className="grid h-10 w-14 shrink-0 place-items-center rounded-lg bg-foreground text-[10px] font-bold italic text-background">
+      <span className="grid h-10 w-14 shrink-0 place-items-center rounded-md bg-foreground text-[10px] font-bold italic text-background">
         VISA
       </span>
       <div className="min-w-0">
@@ -452,11 +452,11 @@ function CardRow({ last4, primary }: { last4: string; primary?: boolean }) {
       </div>
       <div className="flex shrink-0 items-center gap-2">
         {primary ? (
-          <span className="hidden items-center gap-1 rounded-full bg-background px-3 py-1 text-[11px] font-semibold sm:inline-flex">
+          <span className="hidden items-center gap-1 rounded-md bg-background px-3 py-1 text-[11px] font-semibold sm:inline-flex">
             <Check className="h-3 w-3 text-[color:var(--brand-blue)]" /> Principal
           </span>
         ) : (
-          <button className="hidden rounded-full border border-border px-3 py-1 text-[11px] font-medium transition hover:bg-secondary sm:inline-flex">
+          <button className="hidden rounded-md border border-border px-3 py-1 text-[11px] font-medium transition hover:bg-secondary sm:inline-flex">
             Hacer principal
           </button>
         )}
@@ -506,7 +506,7 @@ function ReviewsTab() {
   const total = 3;
   return (
     <Panel title="Reseñas" description="Lo que dicen los usuarios sobre ti.">
-      <div className="grid gap-6 rounded-2xl bg-secondary/50 p-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-10">
+      <div className="grid gap-6 rounded-lg bg-secondary/50 p-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-10">
         <div className="text-center sm:text-left">
           <div className="text-5xl font-semibold tracking-tight">3.3</div>
           <div className="mt-2 flex justify-center sm:justify-start">
