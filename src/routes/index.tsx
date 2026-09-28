@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin, Calendar, Clock, Search, Bell, Menu, ShieldCheck, Tag, BadgeCheck, Zap } from "lucide-react";
 import heroDriver from "@/assets/hero-driver.jpg";
 import carMazda from "@/assets/car-mazda.jpg";
@@ -6,6 +6,16 @@ import carToyota from "@/assets/car-toyota.jpg";
 import carKia from "@/assets/car-kia.jpg";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Rodii — Alquiler de carros en Colombia" },
+      { name: "description", content: "Encuentra y reserva carros verificados en Colombia con precios claros y cobertura incluida." },
+      { property: "og:title", content: "Rodii — Alquiler de carros en Colombia" },
+      { property: "og:description", content: "Reserva carros verificados con precios claros, cobertura y soporte." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
@@ -185,9 +195,15 @@ function Recommended() {
                     ${c.price} <span className="text-xs font-normal text-muted-foreground">COP / día</span>
                   </div>
                 </div>
-                <button className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition hover:bg-[color:var(--brand-blue)]">
-                  Reservar <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                {c.name === "Mazda 2" ? (
+                  <Link to="/carros/mazda-3-2024" className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition hover:bg-[color:var(--brand-blue)]">
+                    Ver detalle <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                ) : (
+                  <button className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition hover:bg-[color:var(--brand-blue)]">
+                    Reservar <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                )}
               </div>
             </div>
           </article>
