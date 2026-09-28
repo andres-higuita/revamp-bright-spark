@@ -24,6 +24,7 @@ import { Route as PerfilIdiomaRouteImport } from './routes/perfil/idioma'
 import { Route as PerfilFiscalRouteImport } from './routes/perfil/fiscal'
 import { Route as PerfilCuentaBancariaRouteImport } from './routes/perfil/cuenta-bancaria'
 import { Route as PerfilBilleteraRouteImport } from './routes/perfil/billetera'
+import { Route as CarrosMazda32024RouteImport } from './routes/carros.mazda-3-2024'
 
 const PerfilRoute = PerfilRouteImport.update({
   id: '/perfil',
@@ -101,11 +102,17 @@ const PerfilBilleteraRoute = PerfilBilleteraRouteImport.update({
   path: '/billetera',
   getParentRoute: () => PerfilRoute,
 } as any)
+const CarrosMazda32024Route = CarrosMazda32024RouteImport.update({
+  id: '/carros/mazda-3-2024',
+  path: '/carros/mazda-3-2024',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mis-vehiculos': typeof MisVehiculosRoute
   '/perfil': typeof PerfilRouteWithChildren
+  '/carros/mazda-3-2024': typeof CarrosMazda32024Route
   '/perfil/billetera': typeof PerfilBilleteraRoute
   '/perfil/cuenta-bancaria': typeof PerfilCuentaBancariaRoute
   '/perfil/fiscal': typeof PerfilFiscalRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mis-vehiculos': typeof MisVehiculosRoute
+  '/carros/mazda-3-2024': typeof CarrosMazda32024Route
   '/perfil/billetera': typeof PerfilBilleteraRoute
   '/perfil/cuenta-bancaria': typeof PerfilCuentaBancariaRoute
   '/perfil/fiscal': typeof PerfilFiscalRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/mis-vehiculos': typeof MisVehiculosRoute
   '/perfil': typeof PerfilRouteWithChildren
+  '/carros/mazda-3-2024': typeof CarrosMazda32024Route
   '/perfil/billetera': typeof PerfilBilleteraRoute
   '/perfil/cuenta-bancaria': typeof PerfilCuentaBancariaRoute
   '/perfil/fiscal': typeof PerfilFiscalRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mis-vehiculos'
     | '/perfil'
+    | '/carros/mazda-3-2024'
     | '/perfil/billetera'
     | '/perfil/cuenta-bancaria'
     | '/perfil/fiscal'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/mis-vehiculos'
+    | '/carros/mazda-3-2024'
     | '/perfil/billetera'
     | '/perfil/cuenta-bancaria'
     | '/perfil/fiscal'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mis-vehiculos'
     | '/perfil'
+    | '/carros/mazda-3-2024'
     | '/perfil/billetera'
     | '/perfil/cuenta-bancaria'
     | '/perfil/fiscal'
@@ -210,6 +222,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MisVehiculosRoute: typeof MisVehiculosRoute
   PerfilRoute: typeof PerfilRouteWithChildren
+  CarrosMazda32024Route: typeof CarrosMazda32024Route
 }
 
 declare module '@tanstack/react-router' {
@@ -319,6 +332,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PerfilBilleteraRouteImport
       parentRoute: typeof PerfilRoute
     }
+    '/carros/mazda-3-2024': {
+      id: '/carros/mazda-3-2024'
+      path: '/carros/mazda-3-2024'
+      fullPath: '/carros/mazda-3-2024'
+      preLoaderRoute: typeof CarrosMazda32024RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -359,6 +379,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MisVehiculosRoute: MisVehiculosRoute,
   PerfilRoute: PerfilRouteWithChildren,
+  CarrosMazda32024Route: CarrosMazda32024Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
