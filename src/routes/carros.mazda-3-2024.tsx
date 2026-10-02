@@ -3,8 +3,10 @@ import { useState } from "react";
 import {
   CalendarDays,
   Camera,
+  Check,
   ChevronDown,
   Clock3,
+  Cpu,
   Fuel,
   Gauge,
   MapPin,
@@ -14,6 +16,8 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  Sun,
+  Wifi,
   X,
 } from "lucide-react";
 import { AppFooter, AppNav } from "@/components/site-chrome";
@@ -68,6 +72,21 @@ const faqs = [
   ["¿Puedo cancelar esta reserva?", "Sí. Podrás revisar las condiciones de cancelación antes de confirmar el pago."],
 ];
 
+type FeatureGroup = { icon: typeof Sun; title: string; items: string[]; wide?: boolean };
+
+const features: FeatureGroup[] = [
+  {
+    icon: Sun,
+    title: "Comodidad",
+    wide: true,
+    items: ["Aire acondicionado", "Sillas de cuero", "Aire acondicionado trasero", "Sunroof / Techo panorámico", "Vidrios eléctricos"],
+  },
+  { icon: Wifi, title: "Conectividad", items: ["Puertos USB", "Bluetooth", "Apple CarPlay"] },
+  { icon: ShieldCheck, title: "Seguridad", items: ["Cámara de reversa", "Sensores de parqueo"] },
+  { icon: Cpu, title: "Tecnología", items: ["Encendido por botón"] },
+  { icon: Sparkles, title: "Estilo", items: ["Rines de lujo"] },
+];
+
 function CarDetail() {
   const [delivery, setDelivery] = useState<"pickup" | "home">("pickup");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -82,6 +101,7 @@ function CarDetail() {
         <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-12">
           <div className="min-w-0 space-y-12">
             <VehicleIntro />
+            <Features />
             <Host />
             <CalendarSection />
             <Delivery />
@@ -156,6 +176,34 @@ function VehicleIntro() {
           </div>
         ))}
       </div>
+    </section>
+  );
+}
+
+function Features() {
+  return (
+    <section>
+      <SectionTitle eyebrow="Equipamiento" title="Características del vehículo" />
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {features.map(({ icon: Icon, title, items, wide }) => (
+          <div key={title} className={`border border-border bg-card p-5 shadow-sm ${wide ? "sm:col-span-2 sm:p-6" : ""}`}>
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-secondary text-foreground/70"><Icon className="h-4 w-4" /></span>
+              <h3 className="text-base font-bold">{title}</h3>
+              <span className="ml-auto text-xs font-semibold text-muted-foreground">{items.length}</span>
+            </div>
+            <ul className={`mt-5 grid gap-x-6 gap-y-3 ${wide ? "sm:grid-cols-2" : ""}`}>
+              {items.map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-foreground/80">
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-md bg-brand-blue/10 text-brand-blue"><Check className="h-3.5 w-3.5" /></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-xs text-muted-foreground">Equipamiento declarado por el propietario y revisado por Rodii antes de publicar el vehículo.</p>
     </section>
   );
 }
