@@ -9,26 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as MisVehiculosRouteImport } from './routes/mis-vehiculos'
 import { Route as PerfilRouteImport } from './routes/perfil'
-import { Route as CarrosMazda32024RouteImport } from './routes/carros.mazda-3-2024'
+import { Route as MisVehiculosRouteImport } from './routes/mis-vehiculos'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as PerfilIndexRouteImport } from './routes/perfil/index'
-import { Route as PerfilBilleteraRouteImport } from './routes/perfil/billetera'
-import { Route as PerfilCuentaBancariaRouteImport } from './routes/perfil/cuenta-bancaria'
-import { Route as PerfilFiscalRouteImport } from './routes/perfil/fiscal'
-import { Route as PerfilIdiomaRouteImport } from './routes/perfil/idioma'
-import { Route as PerfilInformacionPersonalRouteImport } from './routes/perfil/informacion-personal'
-import { Route as PerfilNotificacionesRouteImport } from './routes/perfil/notificaciones'
-import { Route as PerfilPagosRouteImport } from './routes/perfil/pagos'
-import { Route as PerfilPrivacidadRouteImport } from './routes/perfil/privacidad'
-import { Route as PerfilResenasRouteImport } from './routes/perfil/resenas'
-import { Route as PerfilSeguridadRouteImport } from './routes/perfil/seguridad'
 import { Route as PerfilSobreMiRouteImport } from './routes/perfil/sobre-mi'
+import { Route as PerfilSeguridadRouteImport } from './routes/perfil/seguridad'
+import { Route as PerfilResenasRouteImport } from './routes/perfil/resenas'
+import { Route as PerfilPrivacidadRouteImport } from './routes/perfil/privacidad'
+import { Route as PerfilPagosRouteImport } from './routes/perfil/pagos'
+import { Route as PerfilNotificacionesRouteImport } from './routes/perfil/notificaciones'
+import { Route as PerfilInformacionPersonalRouteImport } from './routes/perfil/informacion-personal'
+import { Route as PerfilIdiomaRouteImport } from './routes/perfil/idioma'
+import { Route as PerfilFiscalRouteImport } from './routes/perfil/fiscal'
+import { Route as PerfilCuentaBancariaRouteImport } from './routes/perfil/cuenta-bancaria'
+import { Route as PerfilBilleteraRouteImport } from './routes/perfil/billetera'
+import { Route as CarrosMazda32024RouteImport } from './routes/carros.mazda-3-2024'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MisVehiculosRoute = MisVehiculosRouteImport.update({
@@ -36,14 +36,9 @@ const MisVehiculosRoute = MisVehiculosRouteImport.update({
   path: '/mis-vehiculos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PerfilRoute = PerfilRouteImport.update({
-  id: '/perfil',
-  path: '/perfil',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CarrosMazda32024Route = CarrosMazda32024RouteImport.update({
-  id: '/carros/mazda-3-2024',
-  path: '/carros/mazda-3-2024',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerfilIndexRoute = PerfilIndexRouteImport.update({
@@ -51,24 +46,34 @@ const PerfilIndexRoute = PerfilIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilBilleteraRoute = PerfilBilleteraRouteImport.update({
-  id: '/billetera',
-  path: '/billetera',
+const PerfilSobreMiRoute = PerfilSobreMiRouteImport.update({
+  id: '/sobre-mi',
+  path: '/sobre-mi',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilCuentaBancariaRoute = PerfilCuentaBancariaRouteImport.update({
-  id: '/cuenta-bancaria',
-  path: '/cuenta-bancaria',
+const PerfilSeguridadRoute = PerfilSeguridadRouteImport.update({
+  id: '/seguridad',
+  path: '/seguridad',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilFiscalRoute = PerfilFiscalRouteImport.update({
-  id: '/fiscal',
-  path: '/fiscal',
+const PerfilResenasRoute = PerfilResenasRouteImport.update({
+  id: '/resenas',
+  path: '/resenas',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilIdiomaRoute = PerfilIdiomaRouteImport.update({
-  id: '/idioma',
-  path: '/idioma',
+const PerfilPrivacidadRoute = PerfilPrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => PerfilRoute,
+} as any)
+const PerfilPagosRoute = PerfilPagosRouteImport.update({
+  id: '/pagos',
+  path: '/pagos',
+  getParentRoute: () => PerfilRoute,
+} as any)
+const PerfilNotificacionesRoute = PerfilNotificacionesRouteImport.update({
+  id: '/notificaciones',
+  path: '/notificaciones',
   getParentRoute: () => PerfilRoute,
 } as any)
 const PerfilInformacionPersonalRoute =
@@ -77,35 +82,30 @@ const PerfilInformacionPersonalRoute =
     path: '/informacion-personal',
     getParentRoute: () => PerfilRoute,
   } as any)
-const PerfilNotificacionesRoute = PerfilNotificacionesRouteImport.update({
-  id: '/notificaciones',
-  path: '/notificaciones',
+const PerfilIdiomaRoute = PerfilIdiomaRouteImport.update({
+  id: '/idioma',
+  path: '/idioma',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilPagosRoute = PerfilPagosRouteImport.update({
-  id: '/pagos',
-  path: '/pagos',
+const PerfilFiscalRoute = PerfilFiscalRouteImport.update({
+  id: '/fiscal',
+  path: '/fiscal',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilPrivacidadRoute = PerfilPrivacidadRouteImport.update({
-  id: '/privacidad',
-  path: '/privacidad',
+const PerfilCuentaBancariaRoute = PerfilCuentaBancariaRouteImport.update({
+  id: '/cuenta-bancaria',
+  path: '/cuenta-bancaria',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilResenasRoute = PerfilResenasRouteImport.update({
-  id: '/resenas',
-  path: '/resenas',
+const PerfilBilleteraRoute = PerfilBilleteraRouteImport.update({
+  id: '/billetera',
+  path: '/billetera',
   getParentRoute: () => PerfilRoute,
 } as any)
-const PerfilSeguridadRoute = PerfilSeguridadRouteImport.update({
-  id: '/seguridad',
-  path: '/seguridad',
-  getParentRoute: () => PerfilRoute,
-} as any)
-const PerfilSobreMiRoute = PerfilSobreMiRouteImport.update({
-  id: '/sobre-mi',
-  path: '/sobre-mi',
-  getParentRoute: () => PerfilRoute,
+const CarrosMazda32024Route = CarrosMazda32024RouteImport.update({
+  id: '/carros/mazda-3-2024',
+  path: '/carros/mazda-3-2024',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -227,11 +227,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mis-vehiculos': {
@@ -241,18 +241,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MisVehiculosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/perfil': {
-      id: '/perfil'
-      path: '/perfil'
-      fullPath: '/perfil'
-      preLoaderRoute: typeof PerfilRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/carros/mazda-3-2024': {
-      id: '/carros/mazda-3-2024'
-      path: '/carros/mazda-3-2024'
-      fullPath: '/carros/mazda-3-2024'
-      preLoaderRoute: typeof CarrosMazda32024RouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/perfil/': {
@@ -262,67 +255,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PerfilIndexRouteImport
       parentRoute: typeof PerfilRoute
     }
-    '/perfil/billetera': {
-      id: '/perfil/billetera'
-      path: '/billetera'
-      fullPath: '/perfil/billetera'
-      preLoaderRoute: typeof PerfilBilleteraRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/cuenta-bancaria': {
-      id: '/perfil/cuenta-bancaria'
-      path: '/cuenta-bancaria'
-      fullPath: '/perfil/cuenta-bancaria'
-      preLoaderRoute: typeof PerfilCuentaBancariaRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/fiscal': {
-      id: '/perfil/fiscal'
-      path: '/fiscal'
-      fullPath: '/perfil/fiscal'
-      preLoaderRoute: typeof PerfilFiscalRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/idioma': {
-      id: '/perfil/idioma'
-      path: '/idioma'
-      fullPath: '/perfil/idioma'
-      preLoaderRoute: typeof PerfilIdiomaRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/informacion-personal': {
-      id: '/perfil/informacion-personal'
-      path: '/informacion-personal'
-      fullPath: '/perfil/informacion-personal'
-      preLoaderRoute: typeof PerfilInformacionPersonalRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/notificaciones': {
-      id: '/perfil/notificaciones'
-      path: '/notificaciones'
-      fullPath: '/perfil/notificaciones'
-      preLoaderRoute: typeof PerfilNotificacionesRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/pagos': {
-      id: '/perfil/pagos'
-      path: '/pagos'
-      fullPath: '/perfil/pagos'
-      preLoaderRoute: typeof PerfilPagosRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/privacidad': {
-      id: '/perfil/privacidad'
-      path: '/privacidad'
-      fullPath: '/perfil/privacidad'
-      preLoaderRoute: typeof PerfilPrivacidadRouteImport
-      parentRoute: typeof PerfilRoute
-    }
-    '/perfil/resenas': {
-      id: '/perfil/resenas'
-      path: '/resenas'
-      fullPath: '/perfil/resenas'
-      preLoaderRoute: typeof PerfilResenasRouteImport
+    '/perfil/sobre-mi': {
+      id: '/perfil/sobre-mi'
+      path: '/sobre-mi'
+      fullPath: '/perfil/sobre-mi'
+      preLoaderRoute: typeof PerfilSobreMiRouteImport
       parentRoute: typeof PerfilRoute
     }
     '/perfil/seguridad': {
@@ -332,12 +269,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PerfilSeguridadRouteImport
       parentRoute: typeof PerfilRoute
     }
-    '/perfil/sobre-mi': {
-      id: '/perfil/sobre-mi'
-      path: '/sobre-mi'
-      fullPath: '/perfil/sobre-mi'
-      preLoaderRoute: typeof PerfilSobreMiRouteImport
+    '/perfil/resenas': {
+      id: '/perfil/resenas'
+      path: '/resenas'
+      fullPath: '/perfil/resenas'
+      preLoaderRoute: typeof PerfilResenasRouteImport
       parentRoute: typeof PerfilRoute
+    }
+    '/perfil/privacidad': {
+      id: '/perfil/privacidad'
+      path: '/privacidad'
+      fullPath: '/perfil/privacidad'
+      preLoaderRoute: typeof PerfilPrivacidadRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/pagos': {
+      id: '/perfil/pagos'
+      path: '/pagos'
+      fullPath: '/perfil/pagos'
+      preLoaderRoute: typeof PerfilPagosRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/notificaciones': {
+      id: '/perfil/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/perfil/notificaciones'
+      preLoaderRoute: typeof PerfilNotificacionesRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/informacion-personal': {
+      id: '/perfil/informacion-personal'
+      path: '/informacion-personal'
+      fullPath: '/perfil/informacion-personal'
+      preLoaderRoute: typeof PerfilInformacionPersonalRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/idioma': {
+      id: '/perfil/idioma'
+      path: '/idioma'
+      fullPath: '/perfil/idioma'
+      preLoaderRoute: typeof PerfilIdiomaRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/fiscal': {
+      id: '/perfil/fiscal'
+      path: '/fiscal'
+      fullPath: '/perfil/fiscal'
+      preLoaderRoute: typeof PerfilFiscalRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/cuenta-bancaria': {
+      id: '/perfil/cuenta-bancaria'
+      path: '/cuenta-bancaria'
+      fullPath: '/perfil/cuenta-bancaria'
+      preLoaderRoute: typeof PerfilCuentaBancariaRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/perfil/billetera': {
+      id: '/perfil/billetera'
+      path: '/billetera'
+      fullPath: '/perfil/billetera'
+      preLoaderRoute: typeof PerfilBilleteraRouteImport
+      parentRoute: typeof PerfilRoute
+    }
+    '/carros/mazda-3-2024': {
+      id: '/carros/mazda-3-2024'
+      path: '/carros/mazda-3-2024'
+      fullPath: '/carros/mazda-3-2024'
+      preLoaderRoute: typeof CarrosMazda32024RouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
