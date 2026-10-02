@@ -9,7 +9,7 @@ import {
   Gauge,
   MapPin,
   Navigation,
-  Seat,
+  Armchair,
   Share2,
   ShieldCheck,
   Sparkles,
@@ -134,7 +134,7 @@ function Gallery({ onOpen }: { onOpen: () => void }) {
 
 function VehicleIntro() {
   const specs = [
-    { icon: Seat, label: "5 asientos" },
+    { icon: Armchair, label: "5 asientos" },
     { icon: Fuel, label: "Gasolina corriente" },
     { icon: Gauge, label: "Automático" },
     { icon: Star, label: "1 viaje" },
